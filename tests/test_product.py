@@ -1,6 +1,7 @@
 import pytest
 
-from product import Product
+from src.product import Product
+
 
 @pytest.fixture()
 def product_characters():
