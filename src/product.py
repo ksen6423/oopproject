@@ -26,6 +26,6 @@ class Product:
     def price(self, new_price: float):
         """Сеттер, устанавливающий новое значение приватного атрибута цены"""
         if new_price > 0:
-            self.__price == new_price
+            self.__price = new_price
         else:
             print("Цена не должна быть нулевая или отрицательная")
