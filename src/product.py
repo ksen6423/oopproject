@@ -22,6 +22,10 @@ class Product:
         """Геттер, возвращающий значение приватного атрибута цены"""
         return self.__price
 
+    def __str__(self):
+        """Геттер, возвращающий строковое значение"""
+        return f"{self.name} {int(self.price)} руб. Остаток: {self.quantity} шт."
+
     @price.setter
     def price(self, new_price: float):
         """Сеттер, устанавливающий новое значение приватного атрибута цены"""
@@ -29,3 +33,10 @@ class Product:
             self.__price = new_price
         else:
             print("Цена не должна быть нулевая или отрицательная")
+
+    def __add__(self, other) -> float:
+        """Метод сложения всех продуктов"""
+        if isinstance(other, Product):
+            return (self.__price * self.quantity) + (other.__price * other.quantity)
+        else:
+            raise ValueError("Other не является объектом класса Product")
