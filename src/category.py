@@ -20,6 +20,12 @@ class Category:
         """Метод для добавления товаров в категорию"""
         self.__products.append(product)
         Category.product_count += 1
+        if isinstance(product, Product):
+            self.__products.append(product)
+            Category.product_count += 1
+        raise TypeError(
+            f"Нельзя добавлять {self.__class__.__name__} товары разных категорий."
+        )
 
     @property
     def products(self):

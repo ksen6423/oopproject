@@ -40,3 +40,45 @@ class Product:
             return (self.__price * self.quantity) + (other.__price * other.quantity)
         else:
             raise ValueError("Other не является объектом класса Product")
+
+
+class Smartphone(Product):
+    """Дочерний класс, принимающий класс Product"""
+    name: str
+    description: str
+    price: int
+    quantity: int
+    efficiency: float
+    model: str
+    memory: int
+    color: str
+
+    def __init__(self, name, description, price, quantity, efficiency, model, memory, color):
+        self.efficiency = efficiency
+        self.model = model
+        self.memory = memory
+        self.color = color
+        super().__init__(name, description, price, quantity)
+
+    def __add__(self, other):
+        if self.__class__ is other.__class__:
+            return (self.price * self.quantity) + (other.price * other.quantity)
+        else:
+            raise TypeError
+
+
+class LawnGrass(Product):
+    """Дочерний класс, принимающий класс Product"""
+    name: str
+    description: str
+    price: int
+    quantity: int
+    germination_period: str
+    country: str
+    color: str
+
+    def __init__(self, name, description, price, quantity, country, germination_period, color):
+        self.country = country
+        self.germination_period = germination_period
+        self.color = color
+        super().__init__(name, description, price, quantity)
