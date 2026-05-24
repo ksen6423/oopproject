@@ -61,10 +61,17 @@ class Smartphone(Product):
         super().__init__(name, description, price, quantity)
 
     def __add__(self, other):
-        if self.__class__ is other.__class__:
+        """Сложение двух продуктов по цене и количеству, если оба продукта одного класса"""
+        if type(self) is type(other):
             return (self.price * self.quantity) + (other.price * other.quantity)
-        else:
-            raise TypeError
+        raise TypeError(f"Нельзя добавлять продукт к смартфону: {type(self).__name__} и {type(other).__name__}")
+
+    # def __add__(self, other):
+    #     if type(self) == type(other):
+    #         sum_obj = super().__add__(other)
+    #         return sum_obj
+    #     else:
+    #         raise TypeError('Складывать можно объекты (товары) только из одинаковых классов продуктов.')
 
 
 class LawnGrass(Product):
