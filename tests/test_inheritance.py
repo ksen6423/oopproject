@@ -2,7 +2,7 @@ import unittest
 
 import pytest
 
-from src.product import LawnGrass, Smartphone
+from src.product import LawnGrass, Smartphone, Product
 
 
 @pytest.fixture
@@ -38,6 +38,25 @@ def test_create_lawngrass():
     assert grass1.country == "Россия"
     assert grass1.germination_period == "7 дней"
     assert grass1.color == "Зеленый"
+
+
+if __name__ == "__main__":
+    unittest.main()
+
+
+@pytest.fixture
+def base_category():
+    return Product("Samsung Galaxy S23 Ultra", "256GB, Серый цвет, 200MP камера", 180000.0, 5)
+
+
+class TestProductCategoryAdd:
+
+    def test_add_categories(self, base_category):
+        other_category = Product("55\" QLED 4K", "Фоновая подсветка", 123000.0, 7)
+        result = base_category.quantity + other_category.quantity
+        assert base_category.quantity == 5
+        assert other_category.quantity == 7
+        assert not isinstance(result, Product)
 
 
 if __name__ == "__main__":
