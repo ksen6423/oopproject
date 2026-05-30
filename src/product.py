@@ -1,4 +1,46 @@
-class Product:
+from abc import ABC, abstractmethod
+
+
+class BaseProduct(ABC):
+
+    @abstractmethod
+    def __init__(self, name, description, price, quantity):
+        self.name = name
+        self.description = description
+        self.__price = price
+        self.quantity = quantity
+
+    @abstractmethod
+    def new_product(self, product_data: dict):
+        pass
+
+    @abstractmethod
+    def price(self):
+        pass
+
+    @abstractmethod
+    def __str__(self):
+        pass
+
+    @abstractmethod
+    def price(self, new_price: float):
+        pass
+
+    @abstractmethod
+    def __add__(self, other):
+        pass
+
+
+class MixinLog:
+    def __init__(self):
+        super().__init__()
+        print(repr(self))
+
+    def __repr__(self):
+        return f"{self.__class__.__name__} ({self.name}, {self.description}, {self.price}, {self.quantity})"
+
+
+class Product(BaseProduct, MixinLog):
     """Класс продуктов"""
     name: str
     description: str
@@ -10,6 +52,16 @@ class Product:
         self.description = description
         self.__price = price
         self.quantity = quantity
+        super().__init__(name, description, price, quantity)
+        MixinLog.__init__(self)
+
+    def __eq__(self, other):
+        if isinstance(other, Product):
+            return (self.name == other.name
+                    and self.description == other.description
+                    and self.price == other.price
+                    and self.quantity == other.quantity)
+        return False
 
     @classmethod
     def new_product(cls, product_data: dict):
