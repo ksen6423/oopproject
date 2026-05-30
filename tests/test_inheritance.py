@@ -2,7 +2,7 @@ import unittest
 
 import pytest
 
-from src.product import LawnGrass, Smartphone, Product
+from src.product import LawnGrass, Product, Smartphone
 
 
 @pytest.fixture
