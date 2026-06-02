@@ -10,6 +10,9 @@ class BaseProduct(ABC):
         self.__price = price
         self.quantity = quantity
 
+
+
+
     @abstractmethod
     def new_product(self, product_data: dict):
         pass
@@ -48,12 +51,17 @@ class Product(BaseProduct, MixinLog):
     quantity: int
 
     def __init__(self, name, description, price, quantity):
+        self._validate_quantity(quantity)
         self.name = name
         self.description = description
         self.__price = price
         self.quantity = quantity
         super().__init__(name, description, price, quantity)
         MixinLog.__init__(self)
+
+    def _validate_quantity(self, quantity):
+        if quantity <= 0:
+            raise ValueError("Товар с нулевым количеством не может быть добавлен")
 
     def __eq__(self, other):
         if isinstance(other, Product):
