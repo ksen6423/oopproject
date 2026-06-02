@@ -41,3 +41,10 @@ class Category:
         for product in self.__products:
             full_quantity_products += product.quantity
         return f"{self.name}, количество продуктов: {full_quantity_products} шт."
+
+    def middle_price(self):
+        """Метод, подсчитывающий средний ценник всех товаров"""
+        try:
+            return sum([product.price for product in self.__products]) / len(self.__products)
+        except ZeroDivisionError:
+            return 0
